@@ -10,7 +10,7 @@ const typeDefs = gql`
     }
 
     extend type Weather @key(fields: "code") {
-        code: ID! @external
+        code: ID @external
     }
 
     type Query {

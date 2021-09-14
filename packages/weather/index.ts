@@ -5,12 +5,12 @@ import * as console from 'console';
 
 const typeDefs = gql`
     type Weather @key(fields: "code") {
-        code: ID!
-        name: String!
+        code: ID
+        name: String
     }
 
     type Query {
-        allWeather: [Weather!]
+        allWeather: [Weather]
     }
 `;
 
