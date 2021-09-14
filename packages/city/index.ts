@@ -11,6 +11,7 @@ const typeDefs = gql`
 
     extend type Weather @key(fields: "code") {
         code: ID @external
+        cities: [City]
     }
 
     type Query {
@@ -26,6 +27,10 @@ const resolvers = {
         currentWeather: (city) => {
             return { __typeName: 'Weather', code: city.weatherCode };
         },
+    },
+    Weather: {
+        cities: (weather) =>
+            cityData.filter((city) => city.weatherCode === weather.code),
     },
 };
 
