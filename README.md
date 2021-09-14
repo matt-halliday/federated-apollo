@@ -13,12 +13,12 @@ the gateway is:
 
 ```graphql
 query {
-  allCities {
-    name
-    currentWeather {
-      name
-      code
+    allCities {
+        name
+        currentWeather {
+            name
+            code
+        }
     }
-  }
 }
 ```
