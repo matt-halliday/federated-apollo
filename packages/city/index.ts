@@ -14,7 +14,7 @@ const typeDefs = gql`
         cities: [City]
     }
 
-    type Query {
+    extend type Query {
         allCities: [City]
     }
 `;

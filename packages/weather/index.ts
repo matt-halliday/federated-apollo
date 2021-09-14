@@ -9,7 +9,7 @@ const typeDefs = gql`
         name: String
     }
 
-    type Query {
+    extend type Query {
         allWeather: [Weather]
     }
 `;
