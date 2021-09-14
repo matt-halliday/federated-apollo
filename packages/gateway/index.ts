@@ -1,6 +1,31 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server';
 import { ApolloGateway } from '@apollo/gateway';
 import * as console from 'console';
+
+gql`
+    scalar _Any
+    scalar _FieldSet
+
+    # a union of all types that use the @key directive
+    union _Entity = Weather | City
+
+    type _Service {
+        sdl: String
+    }
+
+    extend type Query {
+        _entities(representations: [_Any!]!): [_Entity]!
+        _service: _Service!
+    }
+
+    directive @external on FIELD_DEFINITION
+    directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
+    directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
+    directive @key(fields: _FieldSet!) repeatable on OBJECT | INTERFACE
+
+    # this is an optional directive discussed below
+    directive @extends on OBJECT | INTERFACE
+`;
 
 const gateway = new ApolloGateway({
     serviceList: [
