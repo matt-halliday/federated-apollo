@@ -1,0 +1,33 @@
+{
+    "name": "federated-apollo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "lint": "npx prettier --write --ignore-unknown --loglevel=error \"**/**/*.{ts,json,md}\"",
+        "build": "npm run lint && npx tsc",
+        "start:city": "node packages/city/index.js",
+        "start:weather": "node packages/weather/index.js",
+        "start:gateway": "node packages/gateway/index.js",
+        "start": "concurrently --kill-others-on-fail \"npm run start:city\" \"npm run start:weather\" \"npm run start:gateway\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "workspaces": [
+        "packages/gateway",
+        "packages/weather",
+        "packages/city",
+        "packages/lib"
+    ],
+    "devDependencies": {
+        "concurrently": "^6.2.1",
+        "prettier": "^2.4.0",
+        "typescript": "^4.4.3"
+    },
+    "dependencies": {
+        "@apollo/federation": "^0.32.0",
+        "apollo-server": "^3.3.0",
+        "graphql": "^15.5.3"
+    }
+}

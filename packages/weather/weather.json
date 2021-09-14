@@ -1,0 +1,18 @@
+[
+    {
+        "code": "1000",
+        "name": "Sunny"
+    },
+    {
+        "code": "1001",
+        "name": "Cloudy"
+    },
+    {
+        "code": "1002",
+        "name": "Rain"
+    },
+    {
+        "code": "1003",
+        "name": "Snow"
+    }
+]
