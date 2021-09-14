@@ -1,24 +1,14 @@
-import { gql } from 'apollo-server';
 import cityData from './cities.json';
-import { buildServer } from 'lib';
+import { buildServer } from '../lib';
+import { gql } from 'apollo-server';
+import * as fs from 'fs';
+import * as path from 'path';
 
-const typeDefs = gql`
-    type City {
-        name: String
-        weatherCode: ID
-        currentWeather: Weather
-    }
-
-    extend type Weather @key(fields: "code") {
-        code: ID @external
-        cities: [City]
-    }
-
-    extend type Query {
-        allCities: [City]
-    }
-`;
-
+const typeDefs = gql(
+    fs.readFileSync(path.resolve(__dirname, './city.graphql'), {
+        encoding: 'utf-8',
+    })
+);
 const resolvers = {
     Query: {
         allCities: () => cityData,

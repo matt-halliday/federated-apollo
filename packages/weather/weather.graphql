@@ -1,0 +1,8 @@
+type Weather @key(fields: "code") {
+    code: ID
+    name: String
+}
+
+extend type Query {
+    allWeather: [Weather]
+}

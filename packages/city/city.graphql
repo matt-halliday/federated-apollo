@@ -1,0 +1,14 @@
+type City {
+    name: String
+    weatherCode: ID
+    currentWeather: Weather
+}
+
+extend type Weather @key(fields: "code") {
+    code: ID @external
+    cities: [City]
+}
+
+extend type Query {
+    allCities: [City]
+}

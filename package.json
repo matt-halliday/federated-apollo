@@ -4,8 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "rover": "npm run --prefix packages/gateway rover",
         "lint": "npx prettier --write --ignore-unknown --loglevel=error \"**/**/*.{ts,json,md}\"",
-        "build": "npm run lint && npx tsc",
+        "build": "npm run lint && npx tsc && npm run rover",
         "start:city": "node packages/city/index.js",
         "start:weather": "node packages/weather/index.js",
         "start:gateway": "node packages/gateway/index.js",
@@ -27,6 +28,8 @@
     },
     "dependencies": {
         "@apollo/federation": "^0.32.0",
+        "@apollo/gateway": "^0.41.0",
+        "@apollo/rover": "^0.2.0",
         "apollo-server": "^3.3.0",
         "graphql": "^15.5.3"
     }

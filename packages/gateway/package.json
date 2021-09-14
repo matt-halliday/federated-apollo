@@ -3,12 +3,10 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
+        "rover": "rover supergraph compose --config ./supergraph-config.yaml > supergraph.graphql",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
-    "description": "",
-    "dependencies": {
-        "@apollo/gateway": "^0.41.0"
-    }
+    "description": ""
 }

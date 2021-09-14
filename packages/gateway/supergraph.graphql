@@ -1,0 +1,44 @@
+schema
+  @core(feature: "https://specs.apollo.dev/core/v0.1"),
+  @core(feature: "https://specs.apollo.dev/join/v0.1")
+{
+  query: Query
+}
+
+directive @core(feature: String!) repeatable on SCHEMA
+
+directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet) on FIELD_DEFINITION
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet) repeatable on OBJECT | INTERFACE
+
+directive @join__owner(graph: join__Graph!) on OBJECT | INTERFACE
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+type City {
+  currentWeather: Weather
+  name: String
+  weatherCode: ID
+}
+
+scalar join__FieldSet
+
+enum join__Graph {
+  CITY @join__graph(name: "city" url: "http://localhost:4001/graphql")
+  WEATHER @join__graph(name: "weather" url: "http://localhost:4002/graphql")
+}
+
+type Query {
+  allCities: [City] @join__field(graph: CITY)
+  allWeather: [Weather] @join__field(graph: WEATHER)
+}
+
+type Weather
+  @join__owner(graph: WEATHER)
+  @join__type(graph: WEATHER, key: "code")
+  @join__type(graph: CITY, key: "code")
+{
+  cities: [City] @join__field(graph: CITY)
+  code: ID @join__field(graph: WEATHER)
+  name: String @join__field(graph: WEATHER)
+}

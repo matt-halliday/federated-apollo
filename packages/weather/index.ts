@@ -1,18 +1,14 @@
-import { gql } from 'apollo-server';
 import weatherData from './weather.json';
-import { buildServer } from 'lib';
-import * as console from 'console';
+import { buildServer } from '../lib';
+import * as fs from 'fs';
+import * as path from 'path';
+import { gql } from 'apollo-server';
 
-const typeDefs = gql`
-    type Weather @key(fields: "code") {
-        code: ID
-        name: String
-    }
-
-    extend type Query {
-        allWeather: [Weather]
-    }
-`;
+const typeDefs = gql(
+    fs.readFileSync(path.resolve(__dirname, './weather.graphql'), {
+        encoding: 'utf-8',
+    })
+);
 
 const resolvers = {
     Query: {
