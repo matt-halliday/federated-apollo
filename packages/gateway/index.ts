@@ -2,6 +2,7 @@ import { ApolloServer } from 'apollo-server';
 import { ApolloGateway } from '@apollo/gateway';
 import * as fs from 'fs';
 import * as path from 'path';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 
 const supergraphSdl = fs
     .readFileSync(path.resolve(__dirname, './supergraph.graphql'))
