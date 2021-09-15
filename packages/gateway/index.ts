@@ -13,6 +13,7 @@ const gateway = new ApolloGateway({
 
 const server = new ApolloServer({
     gateway,
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
 server.listen(4000).then(({ url }) => {
